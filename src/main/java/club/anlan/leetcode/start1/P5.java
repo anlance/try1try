@@ -1,4 +1,4 @@
-package club.anlan.leetcode;
+package club.anlan.leetcode.start1;
 
 public class P5 {
     public static void main(String[] args) {

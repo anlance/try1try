@@ -1,4 +1,4 @@
-package club.anlan.leetcode;
+package club.anlan.leetcode.start1;
 
 import java.util.HashMap;
 import java.util.Map;

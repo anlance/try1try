@@ -1,6 +1,4 @@
-package club.anlan.leetcode;
-
-import java.util.Arrays;
+package club.anlan.leetcode.start1;
 
 public class P4 {
     public static void main(String[] args) {
