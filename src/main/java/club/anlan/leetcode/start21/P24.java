@@ -32,5 +32,5 @@ public class P24 {
             curNode=curNode.next.next;
         }
         return res.next;
-    }   
+    }
 }
