@@ -4,10 +4,10 @@ import java.util.*;
 
 public class P27 {
 
-    // 错误的（去重的问题），暂时不做了，深搜全排列 很有参考
+    // 深搜全排列 很有参考
     public static void main(String[] args) {
         P27 p = new P27();
-        String s = "abcdef";
+        String s = "aabcd";
         ArrayList list = p.Permutation(s);
         Collections.sort(list);
         list.forEach(i -> System.out.println(i));
@@ -19,38 +19,35 @@ public class P27 {
     public ArrayList<String> Permutation(String str) {
         if(str==null || str.length()<=0)
             return new ArrayList<>();
-        // 去除重复元素 并排序
+        // 排序
         Map<Character, Character> map = new HashMap<>();
-        String s = "";
-        for (int i = 0; i < str.length(); ++i) {
-            if (map.containsKey(str.charAt(i)))
-                continue;
-            map.put(str.charAt(i), '0');
-            s += str.charAt(i);
-        }
-        char[] chars = s.toCharArray();
+        char[] chars = str.toCharArray();
         Arrays.sort(chars);
         ArrayList res = new ArrayList();
         char[] cur = new char[chars.length+1];
         boolean[] visited = new boolean[chars.length+1];
-        dfs(0,chars.length,res,chars,cur,visited);
+        Set<String> set = new HashSet<>();
+        dfs(0,chars.length,res,chars,cur,visited,set);
         return res;
     }
 
-    public void dfs(int index, int len, ArrayList<String> list, char[] chars,char[] cur,boolean[] visited) {
+    public void dfs(int index, int len, ArrayList<String> list, char[] chars,char[] cur,boolean[] visited,Set<String> set) {
         if (index == len) {
             String temp = "";
             for (int i = 0; i < len; ++i) {
                 temp += cur[i];
             }
-            list.add(temp);
+            if(!set.contains(temp)){
+                list.add(temp);
+                set.add(temp);
+            }
             return;
         }
         for(int i=1;i<=len;++i){
             if(!visited[i]){
                 visited[i]=true;
                 cur[index]=chars[i-1];
-                dfs(index+1,len,list,chars,cur,visited);
+                dfs(index+1,len,list,chars,cur,visited, set);
                 visited[i]=false;
             }
         }
