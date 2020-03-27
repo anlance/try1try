@@ -1,82 +1,47 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class Solution {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int m = sc.nextInt();
-        int k = sc.nextInt();
-        String[] strs = new String[k];
-        int index = 0;
-        String res = "";
-        int maxD = 0;
-        int maxL = 0;
-        int maxU = 0;
-        int maxR = 0;
-        int[] sxx = new int[k];
-        int[] syy = new int[k];
-        int[] exx = new int[k];
-        int[] eyy = new int[k];
-
-        for(int i=0;i<k;i++){
-            sxx[index] = sc.nextInt();
-            syy[index] = sc.nextInt();
-            index++;
-        }
-        index = 0;
-        for(int i=0;i<k;i++){
-            exx[index] = sc.nextInt();
-            eyy[index] = sc.nextInt();
-            index++;
-        }
-
-
-        index = 0;
-        while (index < k) {
-            String str = "";
-            int sx = sxx[index];
-            int sy = syy[index];
-            int ex = exx[index];
-            int ey = eyy[index];
-            if (ex > sx) {
-                int temp = ex - sx;
-                maxD=Math.max(temp,maxD);
+        int t = sc.nextInt();
+        while (t > 0) {
+            --t;
+            int n = sc.nextInt();
+            String str = sc.next();
+            char[] a = new char[n];
+            Arrays.fill(a, '0');
+            a[0] = '1';
+            char[] b = new char[n];
+            Arrays.fill(b, '0');
+            b[0] = '1';
+            boolean isSame = true;
+            int index = n;
+            for (int i = 1; i < n; ++i) {
+                if (str.charAt(i) == '0')
+                    continue;
+                if (str.charAt(i) == '2') {
+                    a[i] = '1';
+                    b[i] = '1';
+                } else {
+                    a[i] = '1';
+                    index = i;
+                    break;
+                }
             }
-            if (sy < ey) {
-                int temp = ey - sy;
-                maxL=Math.max(temp,maxL);
+            for (int i = index + 1; i < n; ++i) {
+                b[i] = str.charAt(i);
             }
-            if (sx > ex) {
-                int temp = sx - ex;
-                maxU=Math.max(temp,maxU);
+            StringBuilder aa = new StringBuilder();
+            StringBuilder bb = new StringBuilder();
+            for (int i = 0; i < n; ++i) {
+                aa.append(a[i]);
+                bb.append(b[i]);
             }
-            if (ey < sy) {
-                int temp = sy - ey;
-                maxR=Math.max(temp,maxR);
-            }
-            strs[index] = str;
-            ++index;
-        }
-
-        for(int i=0;i<maxD;++i){
-            res+="D";
-        }
-        for(int i=0;i<maxL;++i){
-            res+="L";
-        }
-        for(int i=0;i<maxU;++i){
-            res+="U";
-        }
-        for(int i=0;i<maxR;++i){
-            res+="R";
-        }
-        if(res.length()>2*n*m){
-            System.out.println(-1);
-        } else {
-            System.out.println(res.length());
-            System.out.println(res);
+            System.out.println(aa);
+            System.out.println(bb);
         }
     }
 }
