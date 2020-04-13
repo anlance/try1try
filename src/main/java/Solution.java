@@ -1,31 +1,22 @@
+import java.io.BufferedInputStream;
 import java.util.*;
 
 public class Solution {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int t = sc.nextInt();
-        while (t>0){
+        while (t > 0) {
             --t;
-            int n = sc.nextInt();
-            int lastA = 0;
-            int lastB = 0;
-            boolean res = true;
-            while (n>0){
-                --n;
-                int a = sc.nextInt();
-                int b = sc.nextInt();
-                if(a<lastA || b<lastB || a<b || a-lastA<b-lastB){
-                    res = false;
-                }
-                lastA = a;
-                lastB = b;
+            long n = sc.nextLong();
+            long m = n;
+            int number = -1;
+            while (m>0){
+                number+=(m&1);
+                m>>=1;
             }
-            if(res)
-                System.out.println("YES");
-            else
-                System.out.println("NO");
+            long sn = (n&(-n))<<number;
+            System.out.println((n+1)*sn/2);
         }
     }
-
 
 }
